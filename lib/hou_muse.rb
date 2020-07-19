@@ -1,6 +1,2 @@
-require "hou_muse/version"
-
-module HouMuse
-  class Error < StandardError; end
-  # Your code goes here...
-end
+require_relative "hou_muse/version"
+require_relative "hou_muse/cli.rb"
