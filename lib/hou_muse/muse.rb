@@ -12,7 +12,11 @@ class HouMuse::Muse
     muse1.parking = "directions and parking"
     muse1.connect = "phone, email, etc..."
     
+    muse2 =  self.new
+    muse2.name = "Muse 2 name"
+    muse2.info = "Muse 2 info"
     
+    [muse1, muse2]
   end
   
   

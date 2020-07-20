@@ -14,12 +14,10 @@ class HouMuse::CLI
   end
   
   def list_muse
-    puts <<-DOC
-    1. Asia Society Texas Center
-    2....
-    3....
-    4...
-    DOC
+    @muse = HouMuse::Muse.today
+    @muse.each.with_index(1) do |muse, i|
+      puts "#{i}. #{muse.name} - #{muse.info}"
+    end
     menu
   end
   
@@ -29,6 +27,7 @@ class HouMuse::CLI
     
     if input.to_i > 0
       puts @muse[input.to_i-1]
+      menu
     elsif input == "list"
       list_muse
     elsif input == "exit"
