@@ -7,6 +7,7 @@ class HouMuse::CLI
   
   def welcome
     puts "Welcome to the Houston Museum District!"
+    scrape_main
   end
   
   def goodbye
@@ -15,10 +16,14 @@ class HouMuse::CLI
     puts ""
   end
   
+  def scrape_main
+    @muse = HouMuse::Muse.main
+  end
+  
   def list_muse
-    @muse = HouMuse::Muse.today
+    puts ""
     @muse.each.with_index(1) do |muse, i|
-      puts "#{i}. #{muse.name}"
+      puts "#{i}. #{muse}"
     end
     menu
   end
@@ -33,9 +38,8 @@ class HouMuse::CLI
       puts <<~DOC
       
       ------------------------
-      #{current_muse.name.upcase}
+      #{current_muse}
       ------------------------
-      #{current_muse.info}
       
       DOC
       menu
