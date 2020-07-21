@@ -19,5 +19,17 @@ class HouMuse::Muse
     [muse1, muse2]
   end
   
+  def self.scrape_main
+    museums = []
+    
+    doc = Nokogiri::HTML(open("http://houmuse.org/"))
+    results = doc.css(".museum-nav-listing")
+    results.each do |r|
+      museums << r.text.strip
+    end
+    
+    museums
+    
+  end
   
 end
