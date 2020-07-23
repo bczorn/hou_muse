@@ -11,6 +11,11 @@ class HouMuse::Muse
     @museums
   end
   
+  def self.muse(x)
+    self.sub_scrape(x)
+    @info
+  end
+  
   def self.urls
     @urls
   end
@@ -32,7 +37,9 @@ class HouMuse::Muse
     site = Nokogiri::HTML(open(url))
     
     @name = site.css(".js-museum-name").text
-    @info = site.css(".js-museum-description").text
+    #@info = site.css(".js-museum-description").text
+    #@info = site.search('p').map(&:inner_text).attributes
+    #@info = site.element_children
     binding.pry
   end
   
