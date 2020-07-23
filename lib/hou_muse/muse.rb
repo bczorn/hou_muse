@@ -38,9 +38,18 @@ class HouMuse::Muse
     
     @name = site.css(".js-museum-name").text
     #@info = site.css(".js-museum-description").text
-    #@info = site.search('p').map(&:inner_text).attributes
-    #@info = site.element_children
+    @info = site.search('p').map(&:text) #returns node set
+    # site.at('p').text  #only returns first node. not node set
+    #site.css(".js-museum-description").children.select(&:element?)
+    
     binding.pry
+    #site.css(".js-museum-description").children.each do |i|
+    #  until i == ("\r\n{Any}")
+    #  puts i
+      #binding.pry
+    #end
+  #end
+  
   end
   
 end
