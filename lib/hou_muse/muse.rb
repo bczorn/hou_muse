@@ -13,7 +13,7 @@ class HouMuse::Muse
   
   def self.muse(x)
     self.sub_scrape(x)
-    @info
+    @info.join("\n    ")
   end
   
   def self.urls
@@ -32,21 +32,21 @@ class HouMuse::Muse
   end
   
   def self.sub_scrape(x)
-    x = x.to_i - 1
+    #x = x.to_i - 1
     url = @urls[x]
     site = Nokogiri::HTML(open(url))
-    
+    @info = [" "]
     @name = site.css(".js-museum-name").text
     
     thingx = site.xpath("//p/preceding-sibling::*[1][name()='p']")
     thinge = site.xpath("//p[count(../p) = 1]")
     
     if thingx.count == 0
-      @info = thinge[0].text
+      @info << thinge[0].text
     else
-      @info = thingx.text
+      thingx.each {|i| @info << i.text}
     end
-  
+    @info
   end
   
 end

@@ -34,12 +34,14 @@ class HouMuse::CLI
     input = gets.strip.downcase
     
     if input.to_i > 0
-      current_muse = @muse[input.to_i-1]
+      x = input.to_i - 1
+      current_muse = @muse[x]
       puts <<~DOC
       
-      ------------------------
+      ---------------------------
       #{current_muse}
-      ------------------------
+      ---------------------------
+      #{HouMuse::Muse.muse(x)}
       
       DOC
       menu
