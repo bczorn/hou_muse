@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require "bundler" # /setup"
+require "bundler/setup"
 require_relative "../lib/hou_muse"
 
 # You can add fixtures and/or initialization code here to make experimenting
