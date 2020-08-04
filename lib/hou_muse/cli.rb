@@ -7,6 +7,7 @@ class HouMuse::CLI
   
   def welcome
     puts "Welcome to the Houston Museum District!"
+    puts "The goal of this program is to help plan your next trip to the Houston Museum District."
     scrape_main
   end
   
