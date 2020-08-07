@@ -13,7 +13,14 @@ class HouMuse::Muse
   
   def self.muse(x)
     self.sub_scrape(x)
-    
+  end
+  
+  def self.nearby(x)
+    @near_hash[x]
+  end
+  
+  def self.info(x)
+    @info_hash[x]
   end
   
   def self.urls

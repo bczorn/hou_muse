@@ -34,15 +34,20 @@ class HouMuse::CLI
     puts "Please enter the number of the museum you would like more information on. Type LIST for the list of museums, or type EXIT."
     input = gets.strip.downcase
     
-    if input.to_i > 0
+    if (1..19) === input.to_i
       x = input.to_i - 1
       current_muse = @muse[x]
+      if HouMuse::Muse.info(x) == nil
+        HouMuse::Muse.muse(x)
+      end
       puts <<~DOC
       
       ---------------------------
       #{current_muse}
       ---------------------------
-      #{HouMuse::Muse.muse(x)}
+      #{HouMuse::Muse.info(x)}
+      ---------------------------
+      #{HouMuse::Muse.nearby(x)}
       
       DOC
       menu
@@ -51,7 +56,9 @@ class HouMuse::CLI
     elsif input == "exit"
       goodbye
     else
-      puts "Input is invalid. Type LIST or EXIT."
+      puts ""
+      puts "Input is invalid."
+      menu
     end
   end
   
