@@ -49,6 +49,8 @@ class HouMuse::CLI
       ---------------------------
       #{HouMuse::Muse.nearby(x)}
       
+      ---------------------------
+      
       DOC
       menu
     elsif input == "list"
