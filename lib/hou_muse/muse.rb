@@ -1,6 +1,6 @@
 class HouMuse::Muse
   
-  attr_accessor :name, :address, :info, :hours, :parking, :connect #, :events, :dining, :area
+  attr_accessor :name, :address, :info
   
   def self.main
     self.main_scrape
