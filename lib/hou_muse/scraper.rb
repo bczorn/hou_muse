@@ -1,7 +1,8 @@
 class HouMuse::Scraper
   
+  attr_accessor :museums, :urls
   
-    def self.main_scrape
+  def self.main_scrape
     @museums = []
     @urls = []
     @near_hash = Hash.new
@@ -9,9 +10,18 @@ class HouMuse::Scraper
     doc = Nokogiri::HTML(open("http://houmuse.org/"))
     results = doc.css(".museum-nav-listing")
     results.each do |r|
+     # binding.pry
       @museums << r.text.strip
       @urls << r.css("a").attribute("href").value
     end
+  end
+  
+  def self.museums
+    @museums
+  end
+  
+  def self.urls
+    @urls
   end
   
   def self.sub_scrape(x)
@@ -23,9 +33,12 @@ class HouMuse::Scraper
     @near << nearby.css(".section-header").text.strip
     @near << ":\n"
     nearby.css(".museum-card").each do |i|
+      
       @info = i.text.strip.split.join(" ")
-    end
-    @near << @info
+      @near << "\n"
+      @near << @info
+      end
+    
     @near_hash[x] = @near
     
     @info = [" "]
@@ -40,6 +53,14 @@ class HouMuse::Scraper
     end
     @info = @info.join("\n    ")
     @info_hash[x] = @info
+  end
+  
+  def self.info_hash
+    @info_hash
+  end
+  
+  def self.near_hash
+    @near_hash
   end
   
 end

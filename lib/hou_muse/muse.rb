@@ -11,12 +11,12 @@ class HouMuse::Muse
     HouMuse::Scraper.main_scrape
   end
 
-  def self.sub_scrape
-    HouMuse::Scraper.sub_scrape
+  def self.sub_scrape(x)
+    HouMuse::Scraper.sub_scrape(x)
   end
   
   def self.museums
-    @museums
+    HouMuse::Scraper.museums
   end
   
   def self.muse(x)
@@ -24,15 +24,15 @@ class HouMuse::Muse
   end
   
   def self.nearby(x)
-    @near_hash[x]
+    HouMuse::Scraper.near_hash[x]
   end
   
   def self.info(x)
-    @info_hash[x]
+    HouMuse::Scraper.info_hash[x]
   end
   
   def self.urls
-    @urls
+    HouMuse::Scraper.urls
   end
   
   
