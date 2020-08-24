@@ -37,18 +37,18 @@ class HouMuse::CLI
     if (1..19) === input.to_i
       x = input.to_i - 1
       current_muse = @muse[x]
-      if HouMuse::Muse.info(x) == nil
-        HouMuse::Muse.muse(x)
-      end
+      HouMuse::Muse.info(x)
+      
       puts <<~DOC
       
       ---------------------------
       #{current_muse}
       ---------------------------
       #{HouMuse::Muse.info(x)}
+      
       ---------------------------
       #{HouMuse::Muse.nearby(x)}
-      
+    
       ---------------------------
       
       DOC

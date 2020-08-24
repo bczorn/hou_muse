@@ -28,7 +28,11 @@ class HouMuse::Muse
   end
   
   def self.info(x)
-    HouMuse::Scraper.info_hash[x]
+    if HouMuse::Scraper.info_hash[x] == nil
+      self.muse(x)
+    else
+      HouMuse::Scraper.info_hash[x]
+    end
   end
   
   def self.urls
