@@ -18,7 +18,7 @@ class HouMuse::CLI
   end
   
   def scrape_main
-    @muse = HouMuse::Muse.main
+    HouMuse::Muse.main
   end
   
   def list_muse

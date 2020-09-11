@@ -1,32 +1,39 @@
 class HouMuse::Muse
   
-  attr_accessor :name, :address, :info
+  attr_accessor :name, :url, :info, :nearby
   
-  def self.main
-    self.main_scrape
-    self.museums
-  end
-  
-  def self.main_scrape
-    HouMuse::Scraper.main_scrape
+  @@all = []
+
+  def initialize(name, url)
+    @name = name
+    @url = url
+    @@all << self
   end
 
-  def self.sub_scrape(x)
+  def self.all
+    @@all
+  end
+ 
+
+  def information(index,info, nearby)
+    muse = @@all[index]
+    muse.info = info
+    muse.nearby = nearby
+  end
+
+
+
+
+  def self.main
+    HouMuse::Scraper.main_scrape
+    self.all
+  end
+     
+  def self.muse(x)
     HouMuse::Scraper.sub_scrape(x)
   end
   
-  def self.museums
-    HouMuse::Scraper.museums
-  end
-  
-  def self.muse(x)
-    self.sub_scrape(x)
-  end
-  
-  def self.nearby(x)
-    HouMuse::Scraper.near_hash[x]
-  end
-  
+ 
   def self.info(x)
     if HouMuse::Scraper.info_hash[x] == nil
       self.muse(x)
@@ -35,9 +42,6 @@ class HouMuse::Muse
     end
   end
   
-  def self.urls
-    HouMuse::Scraper.urls
-  end
-  
   
 end
+
