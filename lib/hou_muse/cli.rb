@@ -18,13 +18,13 @@ class HouMuse::CLI
   end
   
   def scrape_main
-    HouMuse::Muse.main
+    @main = HouMuse::Muse.main
   end
   
   def list_muse
     puts ""
-    @muse.each.with_index(1) do |muse, i|
-      puts "#{i}. #{muse}"
+    @main.each.with_index(1) do |muse, i|
+      puts "#{i}. #{muse.name}"
     end
     menu
   end
@@ -35,19 +35,19 @@ class HouMuse::CLI
     input = gets.strip.downcase
     
     if (1..19) === input.to_i
-      x = input.to_i - 1
-      current_muse = @muse[x]
-      HouMuse::Muse.info(x)
+      index = input.to_i - 1
+      current_muse = @main[index]
+      HouMuse::Muse.all[index].muse(index)
       
       puts <<~DOC
       
       ---------------------------
-      #{current_muse}
+      #{current_muse.name}
       ---------------------------
-      #{HouMuse::Muse.info(x)}
+      #{current_muse.info}
       
       ---------------------------
-      #{HouMuse::Muse.nearby(x)}
+      #{current_muse.nearby}
     
       ---------------------------
       

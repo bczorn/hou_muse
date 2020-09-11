@@ -13,7 +13,6 @@ class HouMuse::Muse
   def self.all
     @@all
   end
- 
 
   def information(index,info, nearby)
     muse = @@all[index]
@@ -21,25 +20,21 @@ class HouMuse::Muse
     muse.nearby = nearby
   end
 
-
-
-
   def self.main
     HouMuse::Scraper.main_scrape
     self.all
   end
      
-  def self.muse(x)
-    HouMuse::Scraper.sub_scrape(x)
-  end
-  
- 
-  def self.info(x)
-    if HouMuse::Scraper.info_hash[x] == nil
-      self.muse(x)
+  def muse(index)
+    if self.already_scraped? == true
+      return self
     else
-      HouMuse::Scraper.info_hash[x]
+      HouMuse::Scraper.sub_scrape(index, self.url)
     end
+  end
+ 
+  def already_scraped?
+    self.info != nil
   end
   
   

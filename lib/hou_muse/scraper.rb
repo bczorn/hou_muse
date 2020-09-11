@@ -1,5 +1,4 @@
 class HouMuse::Scraper
-  
     
   def self.main_scrape
     doc = Nokogiri::HTML(open("http://houmuse.org/"))
@@ -11,7 +10,7 @@ class HouMuse::Scraper
     end
   end
    
-  def self.sub_scrape(index)
+  def self.sub_scrape(index, url)
  
     site = Nokogiri::HTML(open(url))
     
@@ -20,14 +19,12 @@ class HouMuse::Scraper
     @near << nearby.css(".section-header").text.strip
     @near << ":\n"
     nearby.css(".museum-card").each do |i|
-      
       @info = i.text.strip.split.join(" ")
       @near << "\n"
       @near << @info
     end
     
    
-    
     @info = [" "]
     @name = site.css(".js-museum-name").text
     thingx = site.xpath("//p/preceding-sibling::*[1][name()='p']")
@@ -39,9 +36,8 @@ class HouMuse::Scraper
       thingx.each {|i| @info << i.text}
     end
     @info = @info.join("\n    ")
-    
 
-    HouMuse::Muse.information(index, @info, @near)
+    HouMuse::Muse.all[index].information(index, @info, @near)
 
   end
 
